@@ -24,10 +24,7 @@ from pyfakefs import fake_filesystem_unittest
 import pandas as pd
 import numpy as np
 
-from memilio.epidata import getDataIntoPandasDataFrame as gd
-from memilio.epidata import getCommuterMobility as gcm
 from memilio.epidata import getVaccinationData as gvd
-from memilio.epidata import defaultDict as dd
 from memilio.epidata import geoModificationGermany as geoger
 
 
@@ -93,7 +90,7 @@ class TestGetVaccinationData(fake_filesystem_unittest.TestCase):
     def test_get_vaccination_data_alternative_ages_no_errors_with_plots(
             self, mockv):
         gvd.get_vaccination_data(out_folder=self.path)
-
+    
     @patch('memilio.epidata.getVaccinationData.download_vaccination_data',
            return_value=df_vacc_data)
     def test_get_standard_vaccination_data_no_errors_with_plots(

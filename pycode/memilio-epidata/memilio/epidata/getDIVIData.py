@@ -45,38 +45,12 @@ ICU_ventilated does not exist for the 24.4. and 25.4.
 """
 
 import os
-import bisect
-from datetime import timedelta, date, datetime
 import pandas as pd
-
+from datetime import date
 from memilio.epidata import getDataIntoPandasDataFrame as gd
 from memilio.epidata import defaultDict as dd
 from memilio.epidata import geoModificationGermany as geoger
-from memilio.epidata import modifyDataframeSeries
-
-
-def extract_subframe_based_on_dates(df, start_date, end_date):
-    """! Removes all data with date lower than start date or higher than end date.
-
-    Returns the Dataframe with only dates between start date and end date.
-    Resets the Index of the Dataframe.
-
-    @param df The dataframe which has to be edited
-    @param start_date Date of first date in dataframe
-    @param end_date Date of last date in dataframe
-    """
-
-    upperdate = datetime.strftime(end_date, '%Y-%m-%d')
-    lowerdate = datetime.strftime(start_date, '%Y-%m-%d')
-
-    # Removes dates higher than end_date
-    df = df[df[dd.EngEng['date']] <= upperdate]
-    # Removes dates lower than start_date
-    df = df[df[dd.EngEng['date']] >= lowerdate]
-
-    df.reset_index(drop=True, inplace=True)
-
-    return df
+from memilio.epidata import modifyDataframeSeries as mDfS
 
 
 def get_divi_data(read_data=dd.defaultDict['read_data'],
@@ -86,7 +60,8 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
                   end_date=dd.defaultDict['end_date'],
                   start_date=dd.defaultDict['start_date'],
                   impute_dates=dd.defaultDict['impute_dates'],
-                  moving_average=dd.defaultDict['moving_average']
+                  moving_average=dd.defaultDict['moving_average'],
+                  make_plot=dd.defaultDict['make_plot']
                   ):
     """! Downloads or reads the DIVI ICU data and writes them in different files.
 
@@ -104,16 +79,16 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
     stored in the files "county_divi".json", "state_divi.json" and "germany_divi.json"
     for counties, states and whole Germany, respectively.
 
-    @param read_data False [Default] or True. Defines if data is read from file or downloaded.
+    @param read_data True or False. Defines if data is read from file or downloaded.
     @param file_format File format which is used for writing the data. Default defined in defaultDict.
-    "False [Default]" if it is downloaded for all dates from start_date to end_date.
-    @param out_folder Folder where data is written to.
-    @param no_raw True or False [Default]. Defines if unchanged raw data is saved or not.
-    @param start_date [Optional] Date of first date in dataframe. Default defined in defaultDict.
-    @param end_date [Optional] Date of last date in dataframe. Default defined in defaultDict.
-    @param impute_dates True or False [Default]. Defines if values for dates without new information are imputed.
-    @param moving_average 0 [Default] or >0. Applies an 'moving_average'-days moving average on all time series
-        to smooth out weekend effects.
+    @param out_folder Folder where data is written to. Default defined in defaultDict.
+    @param no_raw True or False. Defines if unchanged raw data is saved or not. Default defined in defaultDict.
+    @param start_date Date of first date in dataframe. Default defined in defaultDict.
+    @param end_date Date of last date in dataframe. Default defined in defaultDict.
+    @param impute_dates True or False. Defines if values for dates without new information are imputed. Default defined in defaultDict.
+    @param moving_average Integers >=0. Applies an 'moving_average'-days moving average on all time series
+        to smooth out weekend effects.  Default defined in defaultDict.
+    @param make_plot True or False. Defines if plots are generated with matplotlib. Default defined in defaultDict.
     """
 
     # First csv data on 24-04-2020
@@ -159,7 +134,7 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
     df.rename(dd.GerEng, axis=1, inplace=True)
 
     df[dd.EngEng['date']] = pd.to_datetime(df[dd.EngEng['date']], format='%Y-%m-%d %H:%M:%S')
-    df = extract_subframe_based_on_dates(df, start_date, end_date)
+    df = mDfS.extract_subframe_based_on_dates(df, start_date, end_date)
 
     # insert names of states
     df.insert(loc=0, column=dd.EngEng["idState"], value=df[dd.EngEng["state"]])
@@ -178,7 +153,7 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
     df['ID_County'] = df['ID_County'].astype(int)
     # add missing dates (and compute moving average)
     if (impute_dates == True) or (moving_average > 0):
-        df = modifyDataframeSeries.impute_and_reduce_df(
+        df = mDfS.impute_and_reduce_df(
             df,
             {dd.EngEng["idCounty"]: geoger.get_county_ids()},
             [dd.EngEng["ICU"], dd.EngEng["ICU_ventilated"]],

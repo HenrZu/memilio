@@ -74,15 +74,6 @@ class TestGetDiviData(fake_filesystem_unittest.TestCase):
                 os.path.join(directory, 'germany_divi'+text+'.json'))]
         return gdd_calls
 
-    def test_extract_subframe_based_on_dates(self):
-        (df_raw, df_counties, df_states, df_ger) = gdd.get_divi_data(
-            out_folder=self.path)
-        # test if only dates from 08-09-2021 are returned
-        df_state_testdate = gdd.extract_subframe_based_on_dates(
-            df_states, date(2021, 9, 8),
-            date(2021, 9, 8))
-        pd.testing.assert_frame_equal(self.test_df, df_state_testdate)
-
     @patch('memilio.epidata.getDIVIData.pd.read_json')
     @patch('memilio.epidata.getDataIntoPandasDataFrame.loadCsv')
     def test_exit_strings(self, mocklcsv, mockrjson):

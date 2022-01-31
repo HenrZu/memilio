@@ -111,8 +111,8 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
     @param file_format File format which is used for writing the data. Default defined in defaultDict.
     @param out_folder Folder where data is written to. Default defined in defaultDict.
     @param no_raw True or False. Defines if unchanged raw data is saved or not. Default defined in defaultDict.
-    @param start_date [Currently not used] Date of first date in dataframe. Default 2020-01-01.
-    @param end_date [Currently not used] Date of last date in dataframe. Default defined in defaultDict.
+    @param start_date Date of first date in dataframe. Default 2020-01-01.
+    @param end_date Date of last date in dataframe. Default defined in defaultDict.
     @param impute_dates True or False. Defines if values for dates without new information are imputed. Default defined in defaultDict.
     @param moving_average Integers >=0. Applies an 'moving_average'-days moving average on all time series
         to smooth out weekend effects.  Default defined in defaultDict.
@@ -171,6 +171,9 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
                     gd.write_dataframe(df, directory, filename, "json")
             else:
                 raise FileNotFoundError("Something went wrong, dataframe is empty for csv and geojson!")
+    
+    # extract dataframe with relevant dates for computing moving average
+    df = mDfS.extract_subframe_based_on_dates(df, start_date, end_date, moving_average)
 
     # store dict values in parameter to not always call dict itself
     Altersgruppe2 = dd.GerEng['Altersgruppe2']
@@ -202,6 +205,9 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         df['Date'] = df['Meldedatum']
     else:
         df['Date'] = np.where(df['IstErkrankungsbeginn'] == 1, df['Refdatum'], df['Meldedatum'])
+    
+    # extract dataframe with relevant dates for computing moving average
+    df = mDfS.extract_subframe_based_on_dates(df, start_date, end_date, moving_average)
 
     # remove leading zeros for ID_County (if not yet done)
     df['ID_County'] = df['ID_County'].astype(int)
@@ -268,7 +274,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename_orig = filename + '_repdate' 
     else:
         filename_orig = filename
-    gd.write_dataframe(gbNF_cs.reset_index(), directory, filename_orig + '_rki', file_format)
+    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNF_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
     if impute_dates or moving_average > 0:
         gbNF_cs = mDfS.impute_and_reduce_df(
             gbNF_cs.reset_index(),
@@ -279,7 +285,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename = gd.append_filename(filename, impute_dates, moving_average)
         if rep_date:
             filename = filename + '_repdate'
-        gd.write_dataframe(gbNF_cs, directory, filename + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNF_cs, start_date, end_date), directory, filename + '_rki', file_format)
 
     if make_plot:
         # make plot
@@ -298,7 +304,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename_orig = filename + '_repdate' 
     else:
         filename_orig = filename    
-    gd.write_dataframe(gbNT_cs.reset_index(), directory, filename_orig + '_rki', file_format)
+    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNT_cs.reset_index(), start_date, end_date), directory, filename_orig + '_rki', file_format)
     if impute_dates or moving_average > 0:
         gbNT_cs = mDfS.impute_and_reduce_df(
             gbNT_cs.reset_index(),
@@ -309,7 +315,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename = gd.append_filename(filename, impute_dates, moving_average)
         if rep_date:
             filename = filename + '_repdate'
-        gd.write_dataframe(gbNT_cs.reset_index(), directory, filename + '_rki', file_format)      
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNT_cs.reset_index(), start_date, end_date), directory, filename + '_rki', file_format)      
 
     if make_plot:
         gbNT_cs.plot(title='COVID-19 deaths', grid=True,
@@ -331,7 +337,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename_orig = filename + '_repdate' 
     else:
         filename_orig = filename    
-    gd.write_dataframe(gbNF_cs.reset_index(), directory, filename_orig + '_rki', file_format)
+    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNF_cs.reset_index(), start_date, end_date), directory, filename_orig + '_rki', file_format)
     if impute_dates or moving_average > 0:
         gbNF_cs = mDfS.impute_and_reduce_df(
             gbNF_cs.reset_index(),
@@ -342,7 +348,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename = gd.append_filename(filename, impute_dates, moving_average)
         if rep_date:
             filename = filename + '_repdate'
-        gd.write_dataframe(gbNF_cs, directory, filename + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNF_cs, start_date, end_date), directory, filename + '_rki', file_format)
 
     ############## Data for states all ages ################
 
@@ -359,7 +365,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename_orig = filename + '_repdate' 
     else:
         filename_orig = filename    
-    gd.write_dataframe(gbNFst_cs, directory, filename_orig + '_rki', file_format)
+    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNFst_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
     if impute_dates or moving_average > 0:
         gbNFst_cs = mDfS.impute_and_reduce_df(
             gbNFst_cs,
@@ -370,7 +376,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename = gd.append_filename(filename, impute_dates, moving_average)
         if rep_date:
             filename = filename + '_repdate'
-        gd.write_dataframe(gbNFst_cs, directory, filename + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNFst_cs, start_date, end_date), directory, filename + '_rki', file_format)
 
     # output nested json
     # gbNFst_cs.groupby(['IdBundesland', 'Bundesland'], as_index=False) \
@@ -390,7 +396,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename_orig = filename + '_repdate' 
     else:
         filename_orig = filename    
-    gd.write_dataframe(gbAllSt_cs, directory, filename_orig + '_rki', file_format)
+    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllSt_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
     if impute_dates or moving_average > 0:
         gbAllSt_cs = mDfS.impute_and_reduce_df(
             gbAllSt_cs,
@@ -401,7 +407,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename = gd.append_filename(filename, impute_dates, moving_average)
         if rep_date:
             filename = filename + '_repdate'
-        gd.write_dataframe(gbAllSt_cs, directory, filename + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllSt_cs, start_date, end_date), directory, filename + '_rki', file_format)
 
     ############# Data for counties all ages ######################
 
@@ -428,7 +434,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename_orig = filename + '_repdate' 
         else:
             filename_orig = filename        
-        gd.write_dataframe(gbNFc_cs, directory, filename_orig + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNFc_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
         if impute_dates or moving_average > 0:
             gbNFc_cs = mDfS.impute_and_reduce_df(
                 gbNFc_cs,
@@ -439,14 +445,14 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename = gd.append_filename(filename, impute_dates, moving_average)
             if rep_date:
                 filename = filename + '_repdate'
-            gd.write_dataframe(gbNFc_cs, directory, filename + '_rki', file_format)
+            gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNFc_cs, start_date, end_date), directory, filename + '_rki', file_format)
     else:
         filename = 'infected_county'
         if rep_date:
             filename_orig = filename + '_repdate' 
         else:
             filename_orig = filename        
-        gd.write_dataframe(gbNFc_cs, directory, filename_orig + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNFc_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
         if impute_dates or moving_average > 0:
             gbNFc_cs = mDfS.impute_and_reduce_df(
                 gbNFc_cs,
@@ -457,7 +463,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename = gd.append_filename(filename, impute_dates, moving_average)
             if rep_date:
                 filename = filename + '_repdate'
-            gd.write_dataframe(gbNFc_cs, directory, filename + '_rki', file_format)            
+            gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNFc_cs, start_date, end_date), directory, filename + '_rki', file_format)            
 
     # infected (incl recovered), deaths and recovered together
 
@@ -482,7 +488,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename_orig = filename + '_repdate' 
         else:
             filename_orig = filename
-        gd.write_dataframe(gbAllC_cs, directory, filename_orig + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllC_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
         if impute_dates or moving_average > 0:
             gbAllC_cs = mDfS.impute_and_reduce_df(
                 gbAllC_cs,
@@ -493,14 +499,14 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename = gd.append_filename(filename, impute_dates, moving_average)
             if rep_date:
                 filename = filename + '_repdate'
-            gd.write_dataframe(gbAllC_cs, directory, filename + '_rki', file_format)
+            gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllC_cs, start_date, end_date), directory, filename + '_rki', file_format)
     else:
         filename = 'all_county'
         if rep_date:
             filename_orig = filename + '_repdate' 
         else:
             filename_orig = filename        
-        gd.write_dataframe(gbAllC_cs, directory, filename_orig + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllC_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
         if impute_dates or moving_average > 0:
             gbAllC_cs = mDfS.impute_and_reduce_df(
                 gbAllC_cs,
@@ -511,7 +517,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename = gd.append_filename(filename, impute_dates, moving_average)
             if rep_date:
                 filename = filename + '_repdate'
-            gd.write_dataframe(gbAllC_cs, directory, filename + '_rki', file_format)
+            gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllC_cs, start_date, end_date), directory, filename + '_rki', file_format)
 
     ######### Data whole Germany different gender ##################
 
@@ -528,7 +534,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename_orig = filename + '_repdate' 
     else:
         filename_orig = filename    
-    gd.write_dataframe(gbAllG_cs, directory, filename_orig + '_rki', file_format)
+    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllG_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
     if impute_dates or moving_average > 0:
         gbAllG_cs = mDfS.impute_and_reduce_df(
             gbAllG_cs,
@@ -539,7 +545,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename = gd.append_filename(filename, impute_dates, moving_average)
         if rep_date:
             filename = filename + '_repdate'
-        gd.write_dataframe(gbAllG_cs, directory, filename + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllG_cs, start_date, end_date), directory, filename + '_rki', file_format)
 
     if make_plot:
         dfF.groupby(Geschlecht) \
@@ -563,7 +569,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename_orig = filename + '_repdate' 
     else:
         filename_orig = filename    
-    gd.write_dataframe(gbAllGState_cs, directory, filename_orig + '_rki', file_format)
+    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllGState_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
     if impute_dates or moving_average > 0:
         gbAllGState_cs = mDfS.impute_and_reduce_df(
             gbAllGState_cs,
@@ -575,7 +581,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename = gd.append_filename(filename, impute_dates, moving_average)
         if rep_date:
             filename = filename + '_repdate'
-        gd.write_dataframe(gbAllGState_cs, directory, filename + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllGState_cs, start_date, end_date), directory, filename + '_rki', file_format)
 
     ############# Gender and County #####################
 
@@ -590,7 +596,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename_orig = filename + '_repdate' 
         else:
             filename_orig = filename        
-        gd.write_dataframe(gbAllGCounty_cs, directory, filename_orig + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllGCounty_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
         if impute_dates or moving_average > 0:
             gbAllGCounty_cs = mDfS.impute_and_reduce_df(
                 gbAllGCounty_cs,
@@ -602,14 +608,14 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename = gd.append_filename(filename, impute_dates, moving_average)
             if rep_date:
                 filename = filename + '_repdate'
-            gd.write_dataframe(gbAllGCounty_cs, directory, filename + '_rki', file_format)
+            gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllGCounty_cs, start_date, end_date), directory, filename + '_rki', file_format)
     else:
         filename = 'all_county_gender'
         if rep_date:
             filename_orig = filename + '_repdate' 
         else:
             filename_orig = filename        
-        gd.write_dataframe(gbAllGCounty_cs, directory, filename_orig + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllGCounty_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
         if impute_dates or moving_average > 0:
             gbAllGCounty_cs = mDfS.impute_and_reduce_df(
                 gbAllGCounty_cs,
@@ -621,7 +627,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename = gd.append_filename(filename, impute_dates, moving_average)
             if rep_date:
                 filename = filename + '_repdate'
-            gd.write_dataframe(gbAllGCounty_cs, directory, filename + '_rki', file_format)
+            gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllGCounty_cs, start_date, end_date), directory, filename + '_rki', file_format)
 
     ######### Data whole Germany different ages ####################
 
@@ -637,7 +643,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename_orig = filename + '_repdate' 
     else:
         filename_orig = filename    
-    gd.write_dataframe(gbAllA_cs, directory, filename_orig + '_rki', file_format)
+    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllA_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
     if impute_dates or moving_average > 0:
         gbAllA_cs = mDfS.impute_and_reduce_df(
             gbAllA_cs,
@@ -648,7 +654,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename = gd.append_filename(filename, impute_dates, moving_average)
         if rep_date:
             filename = filename + '_repdate'
-        gd.write_dataframe(gbAllA_cs, directory, filename + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllA_cs, start_date, end_date), directory, filename + '_rki', file_format)
 
     if make_plot:
         dfF.groupby(Altersgruppe) \
@@ -682,7 +688,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename_orig = filename + '_repdate' 
     else:
         filename_orig = filename
-    gd.write_dataframe(gbAllAgeState_cs, directory, filename_orig + '_rki', file_format)
+    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllAgeState_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
     if impute_dates or moving_average > 0:
         gbAllAgeState_cs = mDfS.impute_and_reduce_df(
             gbAllAgeState_cs,
@@ -694,7 +700,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename = gd.append_filename(filename, impute_dates, moving_average)
         if rep_date:
             filename = filename + '_repdate'
-        gd.write_dataframe(gbAllAgeState_cs, directory, filename + '_rki', file_format)                                   
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllAgeState_cs, start_date, end_date), directory, filename + '_rki', file_format)                                   
 
     # TODO: uncomment if ALtersgruppe2 will again be provided
     ##### Age5 and Age10#####
@@ -731,7 +737,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename_orig = filename + '_repdate' 
         else:
             filename_orig = filename        
-        gd.write_dataframe(gbAllAgeCounty_cs, directory, filename_orig + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllAgeCounty_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
         if impute_dates or moving_average > 0:
             gbAllAgeCounty_cs = mDfS.impute_and_reduce_df(
                 gbAllAgeCounty_cs,
@@ -743,14 +749,14 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
             filename = gd.append_filename(filename, impute_dates, moving_average)
             if rep_date:
                 filename = filename + '_repdate'
-            gd.write_dataframe(gbAllAgeCounty_cs, directory, filename + '_rki', file_format)                                          
+            gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllAgeCounty_cs, start_date, end_date), directory, filename + '_rki', file_format)                                          
     else:
         filename = 'all_county_age'
         if rep_date:
             filename_orig = filename + '_repdate' 
         else:
             filename_orig = filename        
-        gd.write_dataframe(gbAllAgeCounty_cs, directory, filename_orig + '_rki', file_format)
+        gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllAgeCounty_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
         if impute_dates or moving_average > 0:
             gbAllAgeCounty_cs = mDfS.impute_and_reduce_df(
                 gbAllAgeCounty_cs,
@@ -765,7 +771,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
                 filename = filename + '_all_dates'
             if rep_date:
                 filename = filename + '_repdate'
-            gd.write_dataframe(gbAllAgeCounty_cs, directory, filename + '_rki', file_format)
+            gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbAllAgeCounty_cs, start_date, end_date), directory, filename + '_rki', file_format)
 
     # TODO: uncomment if ALtersgruppe2 will again be provided
     #### age5 ####

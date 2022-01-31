@@ -22,9 +22,11 @@
 @brief Tools modify data frame series like imputing zeros for unknown dates, 
     copying previous values, and/or computing moving averages
 """
+from memilio.epidata.getDataIntoPandasDataFrame import DataError
 import pandas as pd
+import numpy as np
 import itertools
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from memilio.epidata import defaultDict as dd
 
@@ -157,7 +159,7 @@ def impute_and_reduce_df(df_old, group_by_cols, mod_cols, impute='forward', movi
 
     return df_new
 
-def extract_subframe_based_on_dates(df, start_date, end_date):
+def extract_subframe_based_on_dates(df, start_date, end_date, moving_average = 0):
     """! Removes all data with date lower than start date or higher than end date.
 
     Returns the Dataframe with only dates between start date and end date.
@@ -166,16 +168,28 @@ def extract_subframe_based_on_dates(df, start_date, end_date):
     @param df The dataframe which has to be edited
     @param start_date Date of first date in dataframe
     @param end_date Date of last date in dataframe
+    @param moving_average start_date and end_date are extended by half of moving_average to ensure an accurate calculation.
     """
-
+   
     upperdate = datetime.strftime(end_date, '%Y-%m-%d')
     lowerdate = datetime.strftime(start_date, '%Y-%m-%d')
 
-    # Removes dates higher than end_date
-    df = df[df[dd.EngEng['date']] <= upperdate]
-    # Removes dates lower than start_date
-    df = df[df[dd.EngEng['date']] >= lowerdate]
+    if moving_average > 0:
+        upperdate = upperdate - timedelta(int(np.ceil(moving_average/2)))
+        lowerdate = lowerdate + timedelta(int(np.ceil(moving_average/2)))
 
-    df.reset_index(drop=True, inplace=True)
+    try:
+        # Removes dates higher than end_date
+        df = df[df[dd.EngEng['date']] <= upperdate]
+        # Removes dates lower than start_date
+        df = df[df[dd.EngEng['date']] >= lowerdate]
 
-    return df
+        df.reset_index(drop=True, inplace=True)
+
+        return df
+
+    except DataError:
+        
+        print("Can't extract subframe. Returning full DataFrame")
+
+        return df

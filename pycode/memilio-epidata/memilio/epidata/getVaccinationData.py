@@ -208,6 +208,7 @@ def get_vaccination_data(read_data=dd.defaultDict['read_data'],
         gd.write_dataframe(df_data, directory, "RKIVaccFull", "json")
 
     df_data.rename(dd.GerEng, axis=1, inplace=True)
+    df_data = mDfS.extract_subframe_based_on_dates(df_data, start_date, end_date, moving_average)
 
     # remove unknown locations if only modest number (i.e. less than 0.1%)
     if df_data[df_data[dd.EngEng['idCounty']] == 'u'].agg({'Number': sum}).Number \
@@ -705,7 +706,8 @@ def get_vaccination_data(read_data=dd.defaultDict['read_data'],
                  dd.EngEng["date"]],
         columns=[dd.EngEng["ageRKI"],
                  dd.EngEng["date"]])
-
+    df_data_agevacc_county_cs = mDfS.extract_subframe_based_on_dates(
+        df_data_agevacc_county_cs, start_date, end_date)
     if make_plot:
         # have a look extrapolated vaccination ratios (TODO: create plotting for production)
         # aggregate total number of vaccinations per county and age group

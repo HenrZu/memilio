@@ -23,9 +23,11 @@
 @brief Download data from John Hopkins University
 """
 
+import imp
 import os
 import pandas
 
+from memilio.epidata import modifyDataframeSeries as mDfS
 from memilio.epidata import getDataIntoPandasDataFrame as gd
 from memilio.epidata import defaultDict as dd
 
@@ -56,8 +58,8 @@ def get_jh_data(read_data=dd.defaultDict['read_data'],
     @param file_format File format which is used for writing the data. Default defined in defaultDict.
     @param out_folder Folder where data is written to. Default defined in defaultDict.
     @param no_raw True or False. Defines if unchanged raw data is saved or not. Default defined in defaultDict.
-    @param start_date [Currently not used] Date of first date in dataframe. Default defined in defaultDict.
-    @param end_date [Currently not used] Date of last date in dataframe. Default defined in defaultDict.
+    @param start_date Date of first date in dataframe. Default defined in defaultDict.
+    @param end_date Date of last date in dataframe. Default defined in defaultDict.
     @param impute_dates [Currently not used] True or False. Defines if values for dates without new information are imputed. Default defined in defaultDict.
     @param moving_average [Currently not used] Integers >=0. Applies an 'moving_average'-days moving average on all time series
         to smooth out weekend effects.  Default defined in defaultDict.
@@ -92,6 +94,10 @@ def get_jh_data(read_data=dd.defaultDict['read_data'],
 
     df.rename({'Country/Region': 'CountryRegion', 'Province/State': 'ProvinceState'}, axis=1, inplace=True)
     print("Available columns:", df.columns)
+    
+    # extract subframe of dates
+    mDfS.extract_subframe_based_on_dates(df, start_date, end_date)
+
 
     # Change "Korea, South" to SouthKorea
     df.loc[df['CountryRegion'] == "Korea, South", ['CountryRegion']] = 'SouthKorea'

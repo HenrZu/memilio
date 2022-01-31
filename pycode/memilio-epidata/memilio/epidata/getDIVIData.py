@@ -46,7 +46,8 @@ ICU_ventilated does not exist for the 24.4. and 25.4.
 
 import os
 import pandas as pd
-from datetime import date
+import numpy as np
+from datetime import date, timedelta
 from memilio.epidata import getDataIntoPandasDataFrame as gd
 from memilio.epidata import defaultDict as dd
 from memilio.epidata import geoModificationGermany as geoger
@@ -91,12 +92,6 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
     @param make_plot True or False. Defines if plots are generated with matplotlib. Default defined in defaultDict.
     """
 
-    # First csv data on 24-04-2020
-    if start_date < date(2020, 4, 24):
-        print("Warning: First data available on 2020-04-24. "
-              "You asked for " + start_date.strftime("%Y-%m-%d") + ".")
-        start_date = date(2020, 4, 24)
-
     directory = os.path.join(out_folder, 'Germany/')
     gd.check_dir(directory)
 
@@ -134,7 +129,8 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
     df.rename(dd.GerEng, axis=1, inplace=True)
 
     df[dd.EngEng['date']] = pd.to_datetime(df[dd.EngEng['date']], format='%Y-%m-%d %H:%M:%S')
-    df = mDfS.extract_subframe_based_on_dates(df, start_date, end_date)
+    # extract dataframe with relevant dates for computing moving average
+    df = mDfS.extract_subframe_based_on_dates(df, start_date, end_date, moving_average)
 
     # insert names of states
     df.insert(loc=0, column=dd.EngEng["idState"], value=df[dd.EngEng["state"]])
@@ -170,6 +166,9 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
                 dd.EngEng['state'],
                 dd.EngEng['county']]] = [stateid, stateid_to_name[stateid],
                                          countyid_to_name[id]]
+    
+    # extract subframe of dates
+    mDfS.extract_subframe_based_on_dates(df, start_date, end_date)
 
     # write data for counties to file
     df_counties = df[[dd.EngEng["idCounty"],

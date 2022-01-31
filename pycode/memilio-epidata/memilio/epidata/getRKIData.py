@@ -171,9 +171,6 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
                     gd.write_dataframe(df, directory, filename, "json")
             else:
                 raise FileNotFoundError("Something went wrong, dataframe is empty for csv and geojson!")
-    
-    # extract dataframe with relevant dates for computing moving average
-    df = mDfS.extract_subframe_based_on_dates(df, start_date, end_date, moving_average)
 
     # store dict values in parameter to not always call dict itself
     Altersgruppe2 = dd.GerEng['Altersgruppe2']
@@ -202,12 +199,9 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
     # = reference date (date of disease onset) if IstErkrankungsbeginn = 1 else 
     #       take Meldedatum (reporting date)
     if rep_date:
-        df['Date'] = df['Meldedatum']
+        df[dd.EngEng['date']] = df['Meldedatum']
     else:
-        df['Date'] = np.where(df['IstErkrankungsbeginn'] == 1, df['Refdatum'], df['Meldedatum'])
-    
-    # extract dataframe with relevant dates for computing moving average
-    df = mDfS.extract_subframe_based_on_dates(df, start_date, end_date, moving_average)
+        df[dd.EngEng['date']] = np.where(df['IstErkrankungsbeginn'] == 1, df['Refdatum'], df['Meldedatum'])
 
     # remove leading zeros for ID_County (if not yet done)
     df['ID_County'] = df['ID_County'].astype(int)
@@ -254,6 +248,10 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
 
     print("Available columns:", df.columns)
 
+    
+    # extract dataframe with relevant dates for computing moving average
+    df = mDfS.extract_subframe_based_on_dates(df, start_date, end_date, moving_average)
+
     ######## Data for whole Germany all ages ##########
 
     # NeuerFall: Infected (incl. recovered) over "dateToUse":
@@ -274,7 +272,7 @@ def get_rki_data(read_data=dd.defaultDict['read_data'],
         filename_orig = filename + '_repdate' 
     else:
         filename_orig = filename
-    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNF_cs, start_date, end_date), directory, filename_orig + '_rki', file_format)
+    gd.write_dataframe(mDfS.extract_subframe_based_on_dates(gbNF_cs.reset_index(), start_date, end_date), directory, filename_orig + '_rki', file_format)
     if impute_dates or moving_average > 0:
         gbNF_cs = mDfS.impute_and_reduce_df(
             gbNF_cs.reset_index(),

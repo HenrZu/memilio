@@ -170,13 +170,13 @@ def extract_subframe_based_on_dates(df, start_date, end_date, moving_average = 0
     @param end_date Date of last date in dataframe
     @param moving_average start_date and end_date are extended by half of moving_average to ensure an accurate calculation.
     """
-   
-    upperdate = datetime.strftime(end_date, '%Y-%m-%d')
-    lowerdate = datetime.strftime(start_date, '%Y-%m-%d')
 
     if moving_average > 0:
-        upperdate = upperdate - timedelta(int(np.ceil(moving_average/2)))
-        lowerdate = lowerdate + timedelta(int(np.ceil(moving_average/2)))
+        end_date = end_date - timedelta(int(np.ceil(moving_average/2)))
+        start_date = start_date + timedelta(int(np.ceil(moving_average/2)))
+
+    upperdate = datetime.strftime(end_date, '%Y-%m-%d')
+    lowerdate = datetime.strftime(start_date, '%Y-%m-%d')
 
     try:
         # Removes dates higher than end_date

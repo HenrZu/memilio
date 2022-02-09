@@ -58,8 +58,8 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
                   file_format=dd.defaultDict['file_format'],
                   out_folder=dd.defaultDict['out_folder'],
                   no_raw=dd.defaultDict['no_raw'],
-                  end_date=dd.defaultDict['end_date'],
                   start_date=dd.defaultDict['start_date'],
+                  end_date=dd.defaultDict['end_date'],
                   impute_dates=dd.defaultDict['impute_dates'],
                   moving_average=dd.defaultDict['moving_average'],
                   make_plot=dd.defaultDict['make_plot']
@@ -80,7 +80,7 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
     stored in the files "county_divi".json", "state_divi.json" and "germany_divi.json"
     for counties, states and whole Germany, respectively.
 
-    @param read_data True or False. Defines if data is read from file or downloaded.
+    @param read_data True or False. Defines if data is read from file or downloaded.  Default defined in defaultDict.
     @param file_format File format which is used for writing the data. Default defined in defaultDict.
     @param out_folder Folder where data is written to. Default defined in defaultDict.
     @param no_raw True or False. Defines if unchanged raw data is saved or not. Default defined in defaultDict.
@@ -89,7 +89,7 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
     @param impute_dates True or False. Defines if values for dates without new information are imputed. Default defined in defaultDict.
     @param moving_average Integers >=0. Applies an 'moving_average'-days moving average on all time series
         to smooth out weekend effects.  Default defined in defaultDict.
-    @param make_plot True or False. Defines if plots are generated with matplotlib. Default defined in defaultDict.
+    @param make_plot  [Currently not used] True or False. Defines if plots are generated with matplotlib. Default defined in defaultDict.
     """
 
     directory = os.path.join(out_folder, 'Germany/')

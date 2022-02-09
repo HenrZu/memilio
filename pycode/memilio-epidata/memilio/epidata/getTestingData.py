@@ -19,7 +19,6 @@
 #############################################################################
 from datetime import datetime
 import os
-from tracemalloc import start
 import requests
 import io
 import pandas as pd
@@ -110,8 +109,8 @@ def get_testing_data(read_data=dd.defaultDict['read_data'],
                      file_format=dd.defaultDict['file_format'],
                      out_folder=dd.defaultDict['out_folder'],
                      no_raw=dd.defaultDict['no_raw'],
-                     end_date=dd.defaultDict['end_date'],
                      start_date=dd.defaultDict['start_date'],
+                     end_date=dd.defaultDict['end_date'],
                      impute_dates=dd.defaultDict['impute_dates'],
                      moving_average=dd.defaultDict['moving_average'],
                      make_plot=dd.defaultDict['make_plot']):
@@ -152,6 +151,7 @@ def get_testing_data(read_data=dd.defaultDict['read_data'],
     @param start_date Date of first date in dataframe. Default defined in defaultDict.
     @param end_date Date of last date in dataframe. Default defined in defaultDict.
     @param impute_dates True or False. Defines if values for dates without new information are imputed. Default defined in defaultDict.
+        At the moment they are always imputed.
     @param moving_average Integers >=0. Applies an 'moving_average'-days moving average on all time series
         to smooth out weekend effects.  Default defined in defaultDict.
     @param make_plot True or False. Defines if plots are generated with matplotlib. Default defined in defaultDict.
@@ -196,8 +196,8 @@ def get_testing_data(read_data=dd.defaultDict['read_data'],
             directory, filename_state, "json")
     
     # extract dataframe with relevant dates for computing moving average
-    df_test[0] = modifyDataframeSeries.extract_subframe_based_on_dates(df_test[0], start_date, end_date)
-    df_test[1] = modifyDataframeSeries.extract_subframe_based_on_dates(df_test[1], start_date, end_date)
+    # df_test[0] = modifyDataframeSeries.extract_subframe_based_on_dates(df_test[0], start_date, end_date)
+    # df_test[1] = modifyDataframeSeries.extract_subframe_based_on_dates(df_test[1], start_date, end_date)
 
 
     # transform calender week to date by using Thursday ('-4')
@@ -240,6 +240,7 @@ def get_testing_data(read_data=dd.defaultDict['read_data'],
     # extract subframe of dates
     df_test[0] = modifyDataframeSeries.extract_subframe_based_on_dates(
         df_test[0], start_date, end_date)
+    
     # store positive rates for the whole country
     filename = 'germany_testpos'
     filename = gd.append_filename(filename, impute_dates, moving_average)

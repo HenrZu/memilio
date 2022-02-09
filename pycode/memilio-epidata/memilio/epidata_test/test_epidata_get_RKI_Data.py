@@ -26,7 +26,9 @@ import pandas as pd
 
 from memilio.epidata import getRKIData as grki
 from memilio.epidata import getDataIntoPandasDataFrame as gd
+from memilio.epidata import defaultDict as dd
 from unittest.mock import patch
+from datetime import date, datetime
 
 
 class test_get_RKI_Data(fake_filesystem_unittest.TestCase):
@@ -871,6 +873,50 @@ class test_get_RKI_Data(fake_filesystem_unittest.TestCase):
 
         mocklcsv.assert_called()
         self.assertEqual(len(os.listdir(directory)), 27)
+        
+    def test_get_rki_data_timeframe(self):
+        
+        read_data = True
+        file_format = 'json_timeasstring'
+        out_folder = self.path
+        no_raw = False
+
+        directory = os.path.join(out_folder, 'Germany/')
+        gd.check_dir(directory)
+
+        # write file
+        self.write_rki_data(directory)
+        # check if expected file is written
+        self.assertEqual(len(os.listdir(directory)), 1)
+
+        # start and end date 
+        start_date=date(2020, 12, 24)
+        end_date=date(2021,5,17)
+
+        grki.get_rki_data(
+            read_data=read_data, file_format=file_format,
+            out_folder=out_folder, no_raw=no_raw,start_date=start_date,end_date=end_date)
+        
+        file = 'all_germany_rki.json'
+        f_read = os.path.join(directory, file)
+        df_germany_start_end_date = pd.read_json(f_read)
+        
+        grki.get_rki_data(
+            read_data=read_data, file_format=file_format,
+            out_folder=out_folder, no_raw=no_raw)
+        f_read = os.path.join(directory, file)
+        df_germany = pd.read_json(f_read)
+        
+        # extract dates which are between start and end date
+        upperdate = datetime.strftime(end_date, '%Y-%m-%d')
+        lowerdate = datetime.strftime(start_date, '%Y-%m-%d')
+        df_germany = df_germany[df_germany[dd.EngEng['date']] <= upperdate]
+        df_germany = df_germany[df_germany[dd.EngEng['date']] >= lowerdate]
+
+        self.assertEqual(len(df_germany_start_end_date),len(df_germany),"Dataframes don't have the same length.")
+        self.assertEqual(list(df_germany['Confirmed']),list(df_germany['Confirmed']),"Dataframes don't have the same confirmed cases.")
+        self.assertEqual(list(df_germany['Recovered']),list(df_germany['Recovered']),"Dataframes don't have the same recovered cases.")
+        self.assertEqual(list(df_germany['Deaths']),list(df_germany['Deaths']),"Dataframes don't have the same death cases.")
 
 if __name__ == '__main__':
     unittest.main()

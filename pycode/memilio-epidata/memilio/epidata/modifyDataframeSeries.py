@@ -188,7 +188,7 @@ def extract_subframe_based_on_dates(df, start_date, end_date, moving_average = 0
 
         return df
 
-    except DataError:
+    except:
         
         print("Can't extract subframe. Returning full DataFrame")
 

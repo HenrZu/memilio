@@ -23,7 +23,6 @@
 @brief Download data from John Hopkins University
 """
 
-import imp
 import os
 import pandas
 
@@ -36,8 +35,8 @@ def get_jh_data(read_data=dd.defaultDict['read_data'],
                 file_format=dd.defaultDict['file_format'],
                 out_folder=dd.defaultDict['out_folder'],
                 no_raw=dd.defaultDict['no_raw'],
-                end_date=dd.defaultDict['end_date'],
                 start_date=dd.defaultDict['start_date'],
+                end_date=dd.defaultDict['end_date'],
                 impute_dates=dd.defaultDict['impute_dates'],
                 moving_average=dd.defaultDict['moving_average'],
                 make_plot=dd.defaultDict['make_plot']):
@@ -54,7 +53,7 @@ def get_jh_data(read_data=dd.defaultDict['read_data'],
        - Germany, SouthKorea, Spain, France, Italy, US, China
    - furthermore, all countries, for which provinces are added, are written to a file
 
-    @param read_data True or False. Defines if data is read from file or downloaded.
+    @param read_data True or False. Defines if data is read from file or downloaded.  Default defined in defaultDict.
     @param file_format File format which is used for writing the data. Default defined in defaultDict.
     @param out_folder Folder where data is written to. Default defined in defaultDict.
     @param no_raw True or False. Defines if unchanged raw data is saved or not. Default defined in defaultDict.
@@ -96,7 +95,7 @@ def get_jh_data(read_data=dd.defaultDict['read_data'],
     print("Available columns:", df.columns)
     
     # extract subframe of dates
-    mDfS.extract_subframe_based_on_dates(df, start_date, end_date)
+    df=mDfS.extract_subframe_based_on_dates(df, start_date, end_date)
 
 
     # Change "Korea, South" to SouthKorea

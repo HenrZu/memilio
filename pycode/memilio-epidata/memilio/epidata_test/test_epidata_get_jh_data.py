@@ -381,9 +381,12 @@ class TestGetJHData(fake_filesystem_unittest.TestCase):
     def test_get_JH_Data_extract_subframe_between_timeframe(self):
         
         [read_data, file_format, out_folder, no_raw] \
-            = [False, "json", self.path, False]
+            = [True, "json", self.path, False]
             
         gD.check_dir(out_folder)
+        
+        # write files which should be read in by program
+        self.write_jh_data(out_folder)
     
         # define start and end date
         test_start_date = date(2020,12,22)

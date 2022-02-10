@@ -178,18 +178,12 @@ def extract_subframe_based_on_dates(df, start_date, end_date, moving_average = 0
     upperdate = datetime.strftime(end_date, '%Y-%m-%d')
     lowerdate = datetime.strftime(start_date, '%Y-%m-%d')
 
-    try:
-        # Removes dates higher than end_date
-        df = df[df[dd.EngEng['date']] <= upperdate]
-        # Removes dates lower than start_date
-        df = df[df[dd.EngEng['date']] >= lowerdate]
+    # Removes dates higher than end_date
+    df = df[df[dd.EngEng['date']] <= upperdate]
+    # Removes dates lower than start_date
+    df = df[df[dd.EngEng['date']] >= lowerdate]
 
-        df.reset_index(drop=True, inplace=True)
+    df.reset_index(drop=True, inplace=True)
 
-        return df
+    return df
 
-    except:
-        
-        print("Can't extract subframe. Returning full DataFrame")
-
-        return df

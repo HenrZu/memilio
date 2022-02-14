@@ -92,6 +92,12 @@ def get_divi_data(read_data=dd.defaultDict['read_data'],
     @param make_plot  [Currently not used] True or False. Defines if plots are generated with matplotlib. Default defined in defaultDict.
     """
 
+    # First csv data on 24-04-2020
+    if start_date < date(2020, 4, 24):
+        print("Warning: First data available on 2020-04-24. "
+              "You asked for " + start_date.strftime("%Y-%m-%d") + ". Changed it to 2020-4-24.")
+        start_date = date(2020, 4, 24)
+
     directory = os.path.join(out_folder, 'Germany/')
     gd.check_dir(directory)
 

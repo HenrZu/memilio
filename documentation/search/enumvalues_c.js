@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['s_2484',['S',['../namespacemio.html#a2d7f2adb4d5768a1d750f605cca4015ca5dbc98dcc983a70728bd082d1a47546e',1,'mio']]],
-  ['school_2485',['School',['../namespacemio.html#a4ffecc86ccc302b68fff2f48099c2116a955cd8691ca89a6baa6ea10c7787e604',1,'mio']]],
-  ['socialevent_2486',['SocialEvent',['../namespacemio.html#a4ffecc86ccc302b68fff2f48099c2116a53ceef26ee8557fa2446a2596daed5c0',1,'mio']]],
-  ['susceptible_2487',['Susceptible',['../namespacemio.html#a2e4305478e894848657fca367c5a9800a494bf3eaa390dc405dd04ed1c8c99311',1,'mio::Susceptible()'],['../namespacemio.html#ab764bd5fabfc7f31499bcb6791929895a494bf3eaa390dc405dd04ed1c8c99311',1,'mio::Susceptible()'],['../namespacemio.html#a2e4305478e894848657fca367c5a9800a494bf3eaa390dc405dd04ed1c8c99311',1,'mio::Susceptible()'],['../namespacemio.html#ab764bd5fabfc7f31499bcb6791929895a494bf3eaa390dc405dd04ed1c8c99311',1,'mio::Susceptible()']]]
+  ['naturalinfection_4611',['NaturalInfection',['../namespacemio_1_1abm.html#a3bf2b22aabaa39684a4ef82d9a064649a7274449ce8f5d4a4a17e3a73944863f9',1,'mio::abm']]],
+  ['none_4612',['None',['../namespacemio_1_1abm.html#ae5dfbb686f6e9d6e642193be9af23424a6adf97f83acf6453d4a6a4b1070f3754',1,'mio::abm']]],
+  ['noprotection_4613',['NoProtection',['../namespacemio_1_1abm.html#a3bf2b22aabaa39684a4ef82d9a064649a18f2c901a0893097e2ef30ac53f4086a',1,'mio::abm']]]
 ];

@@ -1,27 +1,7 @@
 var searchData=
 [
-  ['cleandata_1438',['cleanData',['../namespacememilio_1_1epidata_1_1cleanData.html',1,'memilio::epidata']]],
-  ['customplot_1439',['customPlot',['../namespacememilio_1_1epidata_1_1customPlot.html',1,'memilio::epidata']]],
-  ['de_1440',['de',['../namespacemio_1_1regions_1_1de.html',1,'mio::regions']]],
-  ['defaultdict_1441',['defaultDict',['../namespacememilio_1_1epidata_1_1defaultDict.html',1,'memilio::epidata']]],
-  ['detail_1442',['detail',['../namespacemio_1_1detail.html',1,'mio']]],
-  ['details_1443',['details',['../namespacemio_1_1details.html',1,'mio']]],
-  ['epidata_1444',['epidata',['../namespacememilio_1_1epidata.html',1,'memilio']]],
-  ['geomodificationgermany_1445',['geoModificationGermany',['../namespacememilio_1_1epidata_1_1geoModificationGermany.html',1,'memilio::epidata']]],
-  ['getcasedata_1446',['getCaseData',['../namespacememilio_1_1epidata_1_1getCaseData.html',1,'memilio::epidata']]],
-  ['getcasedatawithestimations_1447',['getCaseDatawithEstimations',['../namespacememilio_1_1epidata_1_1getCaseDatawithEstimations.html',1,'memilio::epidata']]],
-  ['getcommutermobility_1448',['getCommuterMobility',['../namespacememilio_1_1epidata_1_1getCommuterMobility.html',1,'memilio::epidata']]],
-  ['getdataintopandasdataframe_1449',['getDataIntoPandasDataFrame',['../namespacememilio_1_1epidata_1_1getDataIntoPandasDataFrame.html',1,'memilio::epidata']]],
-  ['getdividata_1450',['getDIVIData',['../namespacememilio_1_1epidata_1_1getDIVIData.html',1,'memilio::epidata']]],
-  ['getjhdata_1451',['getJHData',['../namespacememilio_1_1epidata_1_1getJHData.html',1,'memilio::epidata']]],
-  ['getpopulationdata_1452',['getPopulationData',['../namespacememilio_1_1epidata_1_1getPopulationData.html',1,'memilio::epidata']]],
-  ['getsimulationdata_1453',['getSimulationData',['../namespacememilio_1_1epidata_1_1getSimulationData.html',1,'memilio::epidata']]],
-  ['gettestingdata_1454',['getTestingData',['../namespacememilio_1_1epidata_1_1getTestingData.html',1,'memilio::epidata']]],
-  ['getvaccinationdata_1455',['getVaccinationData',['../namespacememilio_1_1epidata_1_1getVaccinationData.html',1,'memilio::epidata']]],
-  ['memilio_1456',['memilio',['../namespacememilio.html',1,'']]],
-  ['mio_1457',['mio',['../namespacemio.html',1,'']]],
-  ['modifydataframeseries_1458',['modifyDataframeSeries',['../namespacememilio_1_1epidata_1_1modifyDataframeSeries.html',1,'memilio::epidata']]],
-  ['regions_1459',['regions',['../namespacemio_1_1regions.html',1,'mio']]],
-  ['transformmobilitydata_1460',['transformMobilityData',['../namespacememilio_1_1epidata_1_1transformMobilityData.html',1,'memilio::epidata']]],
-  ['transformweatherdata_1461',['transformWeatherData',['../namespacememilio_1_1epidata_1_1transformWeatherData.html',1,'memilio::epidata']]]
+  ['ad_2799',['ad',['../namespacead.html',1,'']]],
+  ['helper_2800',['helper',['../namespacead_1_1helper.html',1,'ad']]],
+  ['internal_2801',['internal',['../namespacead_1_1internal.html',1,'ad']]],
+  ['operations_2802',['operations',['../namespacead_1_1operations.html',1,'ad']]]
 ];

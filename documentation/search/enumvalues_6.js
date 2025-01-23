@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['home_2460',['Home',['../namespacemio.html#a4ffecc86ccc302b68fff2f48099c2116a8cf04a9734132302f96da8e113e80ce5',1,'mio']]],
-  ['hospital_2461',['Hospital',['../namespacemio.html#a4ffecc86ccc302b68fff2f48099c2116acc2ab63fd3eb564be64b4f21bd083bc7',1,'mio']]],
-  ['hospitalized_2462',['Hospitalized',['../namespacemio.html#a2e4305478e894848657fca367c5a9800a6c8cd990c3a6f78e53faa743bee2850b',1,'mio::Hospitalized()'],['../namespacemio.html#ab764bd5fabfc7f31499bcb6791929895a6c8cd990c3a6f78e53faa743bee2850b',1,'mio::Hospitalized()']]]
+  ['generic_4556',['Generic',['../namespacemio_1_1abm.html#aa0d7e3de7f9fed998985776d664ee313a8045a0a6c688b0635e3caccc408a1446',1,'mio::abm']]],
+  ['genericvaccine_4557',['GenericVaccine',['../namespacemio_1_1abm.html#a3bf2b22aabaa39684a4ef82d9a064649aea59b072b3b9842a710ae6569dd6c3f6',1,'mio::abm']]]
 ];

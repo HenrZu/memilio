@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['age0to4_2443',['Age0to4',['../namespacemio.html#a0d380e3f3f17bf6426361472dc0c01b6aecdef1978b0426a4dbce2482e4d992c0',1,'mio']]],
-  ['age15to34_2444',['Age15to34',['../namespacemio.html#a0d380e3f3f17bf6426361472dc0c01b6ad94c53cbd84e5bb40ac92d58ecf410e1',1,'mio']]],
-  ['age35to59_2445',['Age35to59',['../namespacemio.html#a0d380e3f3f17bf6426361472dc0c01b6a1af7e3664451c7caa568fdc0fe9bbea7',1,'mio']]],
-  ['age5to14_2446',['Age5to14',['../namespacemio.html#a0d380e3f3f17bf6426361472dc0c01b6a0e635bc20a1ebd1d39528e24ad180ea6',1,'mio']]],
-  ['age60to79_2447',['Age60to79',['../namespacemio.html#a0d380e3f3f17bf6426361472dc0c01b6a256d02bd24303e832b43bc2c45b1ea8e',1,'mio']]],
-  ['age80plus_2448',['Age80plus',['../namespacemio.html#a0d380e3f3f17bf6426361472dc0c01b6adc550a7d96fee29c927fc5f8200a312a',1,'mio']]]
+  ['antigen_4527',['Antigen',['../namespacemio_1_1abm.html#aa0d7e3de7f9fed998985776d664ee313a1c06164fb2c1db87e83c3f7240ba5575',1,'mio::abm']]],
+  ['asymptomatic_4528',['Asymptomatic',['../namespacemio_1_1oseair.html#a289e5c3e59772dac90a736f54b1fc548a5b6d524f05c5c3a608463b08ee7d31e5',1,'mio::oseair']]]
 ];

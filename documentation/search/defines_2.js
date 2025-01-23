@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['if_5fconstexpr_2506',['IF_CONSTEXPR',['../compiler__diagnostics_8h.html#ad875f9ee1c26b7052efa488975651835',1,'compiler_diagnostics.h']]]
+  ['decl_5ftypesafe_4673',['DECL_TYPESAFE',['../type__safe_8h.html#a4c53d89a42d456f18c61ae7dba90e653',1,'type_safe.h']]],
+  ['deprecated_4674',['DEPRECATED',['../ad_8hpp.html#ac1e8a42306d8e67cb94ca31c3956ee78',1,'ad.hpp']]]
 ];

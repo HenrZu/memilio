@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2025-01-30 16:47:49</td>
+            <td class="headerValue">2025-01-31 14:43:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">14</td>
@@ -180,9 +180,9 @@
 <a name="118"><span class="lineNum">     118 </span>            :      * @brief Get the AgeGroup of this Person.</a>
 <a name="119"><span class="lineNum">     119 </span>            :      * @return AgeGroup of the Person.</a>
 <a name="120"><span class="lineNum">     120 </span>            :      */</a>
-<a name="121"><span class="lineNum">     121 </span><span class="lineCov">      10062 :     AgeGroup get_age() const</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">      10053 :     AgeGroup get_age() const</span></a>
 <a name="122"><span class="lineNum">     122 </span>            :     {</a>
-<a name="123"><span class="lineNum">     123 </span><span class="lineCov">      10062 :         return m_age;</span></a>
+<a name="123"><span class="lineNum">     123 </span><span class="lineCov">      10053 :         return m_age;</span></a>
 <a name="124"><span class="lineNum">     124 </span>            :     }</a>
 <a name="125"><span class="lineNum">     125 </span>            : </a>
 <a name="126"><span class="lineNum">     126 </span>            :     /**</a>
@@ -294,9 +294,9 @@
 <a name="232"><span class="lineNum">     232 </span>            :      * @param[in] params Parameter that includes the length of a quarantine.</a>
 <a name="233"><span class="lineNum">     233 </span>            :      * @return True if the Person is in quarantine.</a>
 <a name="234"><span class="lineNum">     234 </span>            :      */</a>
-<a name="235"><span class="lineNum">     235 </span><span class="lineCov">       1602 :     bool is_in_quarantine(TimePoint t, const Parameters&amp; params) const</span></a>
+<a name="235"><span class="lineNum">     235 </span><span class="lineCov">       1593 :     bool is_in_quarantine(TimePoint t, const Parameters&amp; params) const</span></a>
 <a name="236"><span class="lineNum">     236 </span>            :     {</a>
-<a name="237"><span class="lineNum">     237 </span><span class="lineCov">       1602 :         return t &lt; m_home_isolation_start + params.get&lt;mio::abm::QuarantineDuration&gt;();</span></a>
+<a name="237"><span class="lineNum">     237 </span><span class="lineCov">       1593 :         return t &lt; m_home_isolation_start + params.get&lt;mio::abm::QuarantineDuration&gt;();</span></a>
 <a name="238"><span class="lineNum">     238 </span>            :     }</a>
 <a name="239"><span class="lineNum">     239 </span>            : </a>
 <a name="240"><span class="lineNum">     240 </span>            :     /**</a>

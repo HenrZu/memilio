@@ -7376,15 +7376,13 @@
                 <td><pre>Similar lines in 2 files
 ==memilio.epidata.getJHData:[97:106]
 ==memilio.epidata_test.test_epidata_get_jh_data:[122:129]
-    directory_ger = os.path.join(out_folder, &#39;Germany/&#39;)
-    directory_es = os.path.join(out_folder, &#39;Spain/&#39;)
-    directory_fr = os.path.join(out_folder, &#39;France/&#39;)
-    directory_it = os.path.join(out_folder, &#39;Italy/&#39;)
-    directory_us = os.path.join(out_folder, &#39;US/&#39;)
-    directory_rok = os.path.join(out_folder, &#39;SouthKorea/&#39;)
-    directory_prc = os.path.join(out_folder, &#39;China/&#39;)
-
-    # dictionary of countries</pre></td>
+        directory_ger = os.path.join(out_folder, &#39;Germany/&#39;)
+        directory_es = os.path.join(out_folder, &#39;Spain/&#39;)
+        directory_fr = os.path.join(out_folder, &#39;France/&#39;)
+        directory_it = os.path.join(out_folder, &#39;Italy/&#39;)
+        directory_us = os.path.join(out_folder, &#39;US/&#39;)
+        directory_rok = os.path.join(out_folder, &#39;SouthKorea/&#39;)
+        directory_prc = os.path.join(out_folder, &#39;China/&#39;)</pre></td>
             </tr>
             
             <tr>
@@ -7459,7 +7457,9 @@ import pandas as pd
 from memilio.epidata import defaultDict as dd
 from memilio.epidata import geoModificationGermany as geoger
 from memilio.epidata import getDataIntoPandasDataFrame as gd
-from memilio.epidata import modifyDataframeSeries as mdfs</pre></td>
+from memilio.epidata import modifyDataframeSeries as mdfs
+
+# activate CoW for more predictable behaviour of pandas DataFrames</pre></td>
             </tr>
             
             <tr>
@@ -7483,13 +7483,12 @@ from memilio.epidata import getDataIntoPandasDataFrame as gd
 pd.options.mode.copy_on_write = True
 
 
-def getMobilityFromFile(directory, mobility_file):
-    &#34;&#34;&#34;! Gets a mobility matrix that is written in a plain txt file
-    under the given directory into a pandas data frame.
+def read_population_data(ref_year):
+    &#34;&#34;&#34;! Reads Population data from regionalstatistik.de
 
-    @param directory Path to folder where data is read.
-    @param mobility_file Mobility matrix file which has to be updated.
-    @return Mobility matrix data frame.
+    A request is made to regionalstatistik.de and the StringIO is read in as a csv into the dataframe format.
+    @param ref_year [Default: None] or year (jjjj) convertible to str. Reference year.
+    @return DataFrame
     &#34;&#34;&#34;</pre></td>
             </tr>
             
@@ -7504,15 +7503,12 @@ def getMobilityFromFile(directory, mobility_file):
 ==memilio.epidata.getCommuterMobility:[25:32]
 ==memilio.epidata.transformMobilityData:[19:29]
 import os
-
 import numpy as np
 import pandas as pd
 
 from memilio.epidata import defaultDict as dd
 from memilio.epidata import geoModificationGermany as geoger
-from memilio.epidata import getDataIntoPandasDataFrame as gd
-
-# activate CoW for more predictable behaviour of pandas DataFrames</pre></td>
+from memilio.epidata import getDataIntoPandasDataFrame as gd</pre></td>
             </tr>
             
             <tr>
@@ -7573,7 +7569,9 @@ import pandas as pd
 
 from memilio.epidata import defaultDict as dd
 from memilio.epidata import geoModificationGermany as geoger
-from memilio.epidata import getDataIntoPandasDataFrame as gd</pre></td>
+from memilio.epidata import getDataIntoPandasDataFrame as gd
+
+# activate CoW for more predictable behaviour of pandas DataFrames</pre></td>
             </tr>
             
             <tr>
@@ -7624,7 +7622,32 @@ from memilio.epidata import geoModificationGermany as geoger
 from memilio.epidata import getDataIntoPandasDataFrame as gd
 from memilio.epidata import modifyDataframeSeries as mdfs
 
-# activate CoW for more predictable behaviour of pandas DataFrames</pre></td>
+
+def fetch_divi_data(
+        directory: str,
+        filename: str,
+        conf_obj,
+        read_data: bool = dd.defaultDict[&#39;read_data&#39;],
+        file_format: str = dd.defaultDict[&#39;file_format&#39;],
+) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;! Downloads or reads the DIVI ICU data and writes them in different files.
+
+    If it does not already exist, the folder Germany is generated in the given out_folder.
+    If read_data == True and the file &#34;FullData_DIVI.json&#34; exists, the data is read form this file
+    and stored in a pandas dataframe. If read_data = True and the file does not exist the program is stopped.
+    The downloaded dataframe is written to the file &#34;FullData_DIVI&#34;.
+
+    @param directory str
+        Path to the output directory
+    @param conf_obj
+        configuration object
+    @param filename str
+        File format which is used for writing the data. Default defined in defaultDict.
+    @param read_data bool. True or False. Defines if data is read from file or downloaded. Default defined in defaultDict.
+    @param file_format str. File format which is used for writing the data. Default defined in defaultDict.
+
+    @return Tuple[df_raw, start_date] Tuple. Contains the fetched data as well as the adjusted starting date
+    &#34;&#34;&#34;</pre></td>
             </tr>
             
             <tr>

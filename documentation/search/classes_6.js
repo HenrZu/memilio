@@ -1,21 +1,7 @@
 var searchData=
 [
-  ['ga1s_2234',['ga1s',['../classad_1_1ga1s.html',1,'ad']]],
-  ['ga1s_3c_20ad_5ftape_5freal_20_3e_2235',['ga1s&lt; AD_TAPE_REAL &gt;',['../classad_1_1ga1s.html',1,'ad']]],
-  ['gammasurvivalfunction_2236',['GammaSurvivalFunction',['../structmio_1_1GammaSurvivalFunction.html',1,'mio']]],
-  ['geographicallocation_2237',['GeographicalLocation',['../structmio_1_1abm_1_1GeographicalLocation.html',1,'mio::abm']]],
-  ['gotoschooltimemaximum_2238',['GotoSchoolTimeMaximum',['../structmio_1_1abm_1_1GotoSchoolTimeMaximum.html',1,'mio::abm']]],
-  ['gotoschooltimeminimum_2239',['GotoSchoolTimeMinimum',['../structmio_1_1abm_1_1GotoSchoolTimeMinimum.html',1,'mio::abm']]],
-  ['gotoworktimemaximum_2240',['GotoWorkTimeMaximum',['../structmio_1_1abm_1_1GotoWorkTimeMaximum.html',1,'mio::abm']]],
-  ['gotoworktimeminimum_2241',['GotoWorkTimeMinimum',['../structmio_1_1abm_1_1GotoWorkTimeMinimum.html',1,'mio::abm']]],
-  ['graph_2242',['Graph',['../classmio_1_1Graph.html',1,'mio']]],
-  ['graph_3c_20typename_20simulation_3a_3amodel_2c_20mio_3a_3amobilityparameters_3c_20double_20_3e_20_3e_2243',['Graph&lt; typename Simulation::Model, mio::MobilityParameters&lt; double &gt; &gt;',['../classmio_1_1Graph.html',1,'mio']]],
-  ['graphsimulation_2244',['GraphSimulation',['../classmio_1_1GraphSimulation.html',1,'mio']]],
-  ['graphsimulationbase_2245',['GraphSimulationBase',['../classmio_1_1GraphSimulationBase.html',1,'mio']]],
-  ['graphsimulationbase_3c_20graph_2c_20std_3a_3afunction_3c_20void_28graph_3a_3aedgeproperty_20_26_2c_20size_5ft_2c_20graph_3a_3anodeproperty_20_26_2c_20graph_3a_3anodeproperty_20_26_29_3e_20_3e_2246',['GraphSimulationBase&lt; Graph, std::function&lt; void(Graph::EdgeProperty &amp;, size_t, Graph::NodeProperty &amp;, Graph::NodeProperty &amp;)&gt; &gt;',['../classmio_1_1GraphSimulationBase.html',1,'mio']]],
-  ['graphsimulationstochastic_2247',['GraphSimulationStochastic',['../classmio_1_1GraphSimulationStochastic.html',1,'mio']]],
-  ['gt1s_2248',['gt1s',['../classad_1_1gt1s.html',1,'ad']]],
-  ['gt1s_3c_20ad_5ftape_5freal_20_3e_2249',['gt1s&lt; AD_TAPE_REAL &gt;',['../classad_1_1gt1s.html',1,'ad']]],
-  ['gvalue_2250',['gvalue',['../classad_1_1gvalue.html',1,'ad']]],
-  ['gvalue_3c_20dcot_20_3e_2251',['gvalue&lt; DcoT &gt;',['../classad_1_1gvalue.html',1,'ad']]]
+  ['highviralloadprotectionfactor_779',['HighViralLoadProtectionFactor',['../structmio_1_1abm_1_1HighViralLoadProtectionFactor.html',1,'mio::abm']]],
+  ['household_780',['Household',['../classmio_1_1abm_1_1Household.html',1,'mio::abm']]],
+  ['householdgroup_781',['HouseholdGroup',['../classmio_1_1abm_1_1HouseholdGroup.html',1,'mio::abm']]],
+  ['householdmember_782',['HouseholdMember',['../classmio_1_1abm_1_1HouseholdMember.html',1,'mio::abm']]]
 ];

@@ -1,13 +1,8 @@
 var searchData=
 [
-  ['damping_2ecpp_2629',['damping.cpp',['../damping_8cpp.html',1,'']]],
-  ['damping_2eh_2630',['damping.h',['../damping_8h.html',1,'']]],
-  ['damping_5fsampling_2ecpp_2631',['damping_sampling.cpp',['../damping__sampling_8cpp.html',1,'']]],
-  ['damping_5fsampling_2eh_2632',['damping_sampling.h',['../damping__sampling_8h.html',1,'']]],
-  ['date_2ecpp_2633',['date.cpp',['../date_8cpp.html',1,'']]],
-  ['date_2eh_2634',['date.h',['../date_8h.html',1,'']]],
-  ['default_5fserialize_2ecpp_2635',['default_serialize.cpp',['../default__serialize_8cpp.html',1,'']]],
-  ['default_5fserialize_2eh_2636',['default_serialize.h',['../default__serialize_8h.html',1,'']]],
-  ['dynamic_5fnpis_2ecpp_2637',['dynamic_npis.cpp',['../dynamic__npis_8cpp.html',1,'']]],
-  ['dynamic_5fnpis_2eh_2638',['dynamic_npis.h',['../dynamic__npis_8h.html',1,'']]]
+  ['infection_2ecpp_922',['infection.cpp',['../infection_8cpp.html',1,'']]],
+  ['infection_2eh_923',['infection.h',['../infection_8h.html',1,'']]],
+  ['infection_5fstate_2eh_924',['infection_state.h',['../ode__secirts_2infection__state_8h.html',1,'(Global Namespace)'],['../sde__sirs_2infection__state_8h.html',1,'(Global Namespace)'],['../sde__sir_2infection__state_8h.html',1,'(Global Namespace)'],['../sde__seirvv_2infection__state_8h.html',1,'(Global Namespace)'],['../ode__sir_2infection__state_8h.html',1,'(Global Namespace)'],['../ode__seir_2infection__state_8h.html',1,'(Global Namespace)'],['../ode__secirvvs_2infection__state_8h.html',1,'(Global Namespace)'],['../ode__secir_2infection__state_8h.html',1,'(Global Namespace)'],['../ode__seair_2infection__state_8h.html',1,'(Global Namespace)'],['../lct__secir_2infection__state_8h.html',1,'(Global Namespace)'],['../ide__seir_2infection__state_8h.html',1,'(Global Namespace)'],['../ide__secir_2infection__state_8h.html',1,'(Global Namespace)'],['../glct__secir_2infection__state_8h.html',1,'(Global Namespace)'],['../abm_2infection__state_8h.html',1,'(Global Namespace)']]],
+  ['initializer_5fflows_2eh_925',['initializer_flows.h',['../initializer__flows_8h.html',1,'']]],
+  ['intervention_5ftype_2eh_926',['intervention_type.h',['../intervention__type_8h.html',1,'']]]
 ];

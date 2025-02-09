@@ -1,21 +1,9 @@
 var searchData=
 [
-  ['latencytime_2315',['LatencyTime',['../structmio_1_1iseir_1_1LatencyTime.html',1,'mio::iseir']]],
-  ['lctinfectionstate_2316',['LctInfectionState',['../classmio_1_1LctInfectionState.html',1,'mio']]],
-  ['lctpopulations_2317',['LctPopulations',['../classmio_1_1LctPopulations.html',1,'mio']]],
-  ['limits_2318',['Limits',['../structmio_1_1Limits.html',1,'mio']]],
-  ['limits_3c_20ad_3a_3ainternal_3a_3aactive_5ftype_3c_20fp_2c_20datahandler_20_3e_20_3e_2319',['Limits&lt; ad::internal::active_type&lt; FP, DataHandler &gt; &gt;',['../structmio_1_1Limits_3_01ad_1_1internal_1_1active__type_3_01FP_00_01DataHandler_01_4_01_4.html',1,'mio']]],
-  ['limits_3c_20double_20_3e_2320',['Limits&lt; double &gt;',['../structmio_1_1Limits_3_01double_01_4.html',1,'mio']]],
-  ['limits_3c_20float_20_3e_2321',['Limits&lt; float &gt;',['../structmio_1_1Limits_3_01float_01_4.html',1,'mio']]],
-  ['localstrategy_2322',['LocalStrategy',['../structmio_1_1abm_1_1TestingStrategy_1_1LocalStrategy.html',1,'mio::abm::TestingStrategy']]],
-  ['location_2323',['Location',['../classmio_1_1abm_1_1Location.html',1,'mio::abm']]],
-  ['locationid_2324',['LocationId',['../structmio_1_1abm_1_1LocationId.html',1,'mio::abm']]],
-  ['lockdowndate_2325',['LockdownDate',['../structmio_1_1abm_1_1LockdownDate.html',1,'mio::abm']]],
-  ['logalways_2326',['LogAlways',['../structmio_1_1LogAlways.html',1,'mio']]],
-  ['logdataformobility_2327',['LogDataForMobility',['../structmio_1_1abm_1_1LogDataForMobility.html',1,'mio::abm']]],
-  ['loginfectionstate_2328',['LogInfectionState',['../structmio_1_1abm_1_1LogInfectionState.html',1,'mio::abm']]],
-  ['loglocationinformation_2329',['LogLocationInformation',['../structmio_1_1abm_1_1LogLocationInformation.html',1,'mio::abm']]],
-  ['lognormsurvivalfunction_2330',['LognormSurvivalFunction',['../structmio_1_1LognormSurvivalFunction.html',1,'mio']]],
-  ['logonce_2331',['LogOnce',['../structmio_1_1LogOnce.html',1,'mio']]],
-  ['logpersoninformation_2332',['LogPersonInformation',['../structmio_1_1abm_1_1LogPersonInformation.html',1,'mio::abm']]]
+  ['mask_805',['Mask',['../classmio_1_1abm_1_1Mask.html',1,'mio::abm']]],
+  ['maskprotection_806',['MaskProtection',['../structmio_1_1abm_1_1MaskProtection.html',1,'mio::abm']]],
+  ['maximumcontacts_807',['MaximumContacts',['../structmio_1_1abm_1_1MaximumContacts.html',1,'mio::abm']]],
+  ['maxriskofinfectionfromsymptomatic_808',['MaxRiskOfInfectionFromSymptomatic',['../structmio_1_1osecir_1_1MaxRiskOfInfectionFromSymptomatic.html',1,'mio::osecir::MaxRiskOfInfectionFromSymptomatic&lt; FP &gt;'],['../structmio_1_1osecirts_1_1MaxRiskOfInfectionFromSymptomatic.html',1,'mio::osecirts::MaxRiskOfInfectionFromSymptomatic&lt; FP &gt;'],['../structmio_1_1osecirvvs_1_1MaxRiskOfInfectionFromSymptomatic.html',1,'mio::osecirvvs::MaxRiskOfInfectionFromSymptomatic&lt; FP &gt;']]],
+  ['mobility_5fdata_809',['mobility_data',['../structmio_1_1abm_1_1mobility__data.html',1,'mio::abm']]],
+  ['model_810',['Model',['../classmio_1_1abm_1_1Model.html',1,'mio::abm::Model'],['../classmio_1_1glsecir_1_1Model.html',1,'mio::glsecir::Model&lt; NumExposed, NumInfectedNoSymptoms, NumInfectedSymptoms, NumInfectedSevere, NumInfectedCritical &gt;'],['../classmio_1_1isecir_1_1Model.html',1,'mio::isecir::Model'],['../classmio_1_1iseir_1_1Model.html',1,'mio::iseir::Model&lt; FP &gt;'],['../classmio_1_1lsecir_1_1Model.html',1,'mio::lsecir::Model&lt; LctStates &gt;'],['../classmio_1_1oseair_1_1Model.html',1,'mio::oseair::Model&lt; FP &gt;'],['../classmio_1_1osecir_1_1Model.html',1,'mio::osecir::Model&lt; FP &gt;'],['../classmio_1_1osecirts_1_1Model.html',1,'mio::osecirts::Model&lt; FP &gt;'],['../classmio_1_1osecirvvs_1_1Model.html',1,'mio::osecirvvs::Model&lt; FP &gt;'],['../classmio_1_1oseir_1_1Model.html',1,'mio::oseir::Model&lt; FP &gt;'],['../classmio_1_1osir_1_1Model.html',1,'mio::osir::Model&lt; FP &gt;'],['../classmio_1_1sseirvv_1_1Model.html',1,'mio::sseirvv::Model'],['../classmio_1_1ssir_1_1Model.html',1,'mio::ssir::Model'],['../classmio_1_1ssirs_1_1Model.html',1,'mio::ssirs::Model']]]
 ];
